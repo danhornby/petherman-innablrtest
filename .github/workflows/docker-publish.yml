@@ -63,7 +63,7 @@ jobs:
       # Starting docker container locally on github runner
       - name: start docker container
         run: | 
-          docker run --rm -d --publish published=5000,target=5000,mode=host ${{ env.TEST_TAG }}
+          docker run -d --publish published=5000,target=5000,mode=host ${{ env.TEST_TAG }}
       #    curl -LI --request GET --url http://127.0.0.1:5000/status -o /dev/null -w '%{http_code}\n' -s
 
       - name: test status using curl library
