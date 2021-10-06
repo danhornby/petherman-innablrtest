@@ -1,5 +1,7 @@
 FROM ubuntu:20.04
 
+EXPOSE 5000
+
 ENV COMMIT_SHA=${GITHUB_SHA}
 CMD ["echo $COMMIT_SHA"]
 
