@@ -64,7 +64,12 @@ jobs:
       - name: start docker container
         run: | 
           docker run --rm -d -p 5000:5000 ${{ env.TEST_TAG }}
-          curl -LI --request GET --url http://127.0.0.1:5000/status -o /dev/null -w '%{http_code}\n' -s
+      #    curl -LI --request GET --url http://127.0.0.1:5000/status -o /dev/null -w '%{http_code}\n' -s
+
+      - name: test status using curl library
+        uses: wei/curl@master
+        with:
+          args: http://127.0.0.1:5000/status
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
