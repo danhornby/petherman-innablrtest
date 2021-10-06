@@ -69,7 +69,7 @@ jobs:
       # Starting docker container locally on github runner
       - name: start docker container
         run: | 
-          docker run -d -p 5000:5000 ${{ env.TEST_TAG }}
+          docker run -d --network host -p 5000:5000 ${{ env.TEST_TAG }}
           curl http://127.0.0.1:5000/status
 
       # Build and push Docker image with Buildx (don't push on PR)
