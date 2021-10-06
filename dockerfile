@@ -1,7 +1,5 @@
 FROM python:3
 
-EXPOSE 5000
-
 ENV COMMIT_SHA="${GITHUB_SHA}"
 CMD ["echo $COMMIT_SHA"]
 
