@@ -56,17 +56,24 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-#      -
-#        name: Build and export to Docker
-#        uses: docker/build-push-action@v2
-#        with:
-#          context: .
-#          load: true
-#          tags: ${{ env.TEST_TAG }}
-#          build-args: 
-#            GITHUB_SHA=$SHORT_SHA
+      -
+        name: Build and export to Docker
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          load: true
+          tags: ${{ env.TEST_TAG }}
+          build-args: 
+            GITHUB_SHA=$SHORT_SHA
 
-
+      # Starting docker container locally on github runner
+      - name: start docker container
+        run: | 
+          docker run -d --name innablr -p 5000:5000 ${{ steps.meta.outputs.tags }}
+          docker ps -a
+          docker logs -f --until=10s innablr
+          #curl -v http://0.0.0.0:5000/status
+          curl -v -LI --request GET --url http://0.0.0.0:5000/status -o /dev/null -w '%{http_code}\n' -s
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
@@ -80,11 +87,5 @@ jobs:
           build-args: 
             GITHUB_SHA=$SHORT_SHA
           
-      # Starting docker container locally on github runner
-      - name: start docker container
-        run: | 
-          docker run -d --name innablr -p 5000:5000 ${{ steps.meta.outputs.tags }}
-          docker ps -a
-          docker logs -f --until=10s innablr
-          curl -v http://0.0.0.0:5000
+
       
