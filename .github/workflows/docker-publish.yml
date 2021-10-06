@@ -33,6 +33,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      
+      - name: Build Docker image 
+        run: docker build -t innablrtest .
+      - name: Run tests inside the container
+        run: docker run innablrtest -d -p 5000:5000 
 
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
@@ -61,22 +66,3 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          
-  test:
-    name: Run test suite
-    runs-on: ubuntu-latest
-    env:
-      DOCKER_USER: ${{ secrets.DOCKER_USER }}
-      DOCKER_PASS: ${{ secrets.DOCKER_PASS }}  
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Log into registry ${{ env.REGISTRY }}
-      if: github.event_name != 'pull_request'
-      uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
-      with:
-        registry: ${{ env.REGISTRY }}
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
