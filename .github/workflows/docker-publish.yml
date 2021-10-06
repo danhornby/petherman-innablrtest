@@ -64,7 +64,7 @@ jobs:
           context: .
           load: true
           tags: ${{ env.TEST_TAG }}
-          build-args: GITHUB_SHA=$SHA_TMP
+          build-args: GITHUB_SHA=${{ env.SHA_TMP }}
 
       # Starting docker container locally on github runner
       - name: start docker container
