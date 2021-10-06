@@ -11,8 +11,8 @@ RUN apt-get update && \
         apt-get install -y build-essential python3.6 python3.6-dev python3-pip && \
         apt-get install -y git  && \
         # update pip
-        python3.8 -m pip install pip --upgrade && \
-        python3.8 -m pip install wheel
+        python3.6 -m pip install pip --upgrade && \
+        python3.6 -m pip install wheel
 
 # Copying requirements.txt
 COPY ./requirements.txt /app/requirements.txt
