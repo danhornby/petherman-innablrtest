@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-# Installing Python 3.8
+# Installing Python 3.6
 RUN apt-get update && \
         apt-get install -y software-properties-common vim && \
         add-apt-repository ppa:deadsnakes/ppa && \
@@ -14,11 +14,14 @@ RUN apt-get update && \
 # Copying requirements.txt
 COPY ./requirements.txt /app/requirements.txt
 
-WORKDIR /app
+#WORKDIR /app
 
 RUN pip install -r requirements.txt
 RUN python3 --version
 COPY . /app
+
+CMD ["echo $GITHUB_SHA"]
+
 
 ENTRYPOINT [ "python3" ]
 CMD [ "app.py" ]
