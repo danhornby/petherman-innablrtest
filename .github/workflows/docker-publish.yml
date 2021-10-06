@@ -37,9 +37,9 @@ jobs:
       - name: Build Docker image 
         run: docker build -t innablrtest .
       - name: start docker container
-        run: docker run -p 5000:5000 innablrtest
+        run: docker run -p -d 5000:5000 innablrtest
       - name: Run tests inside the container
-        run: curl http://localhost:5000/status
+        run: curl -LI http://127.0.0.1:5000/status -o /dev/null -w '%{http_code}\n' -s
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
       - name: Log into registry ${{ env.REGISTRY }}
