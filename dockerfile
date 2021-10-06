@@ -14,7 +14,7 @@ RUN apt-get update && \
 # Copying requirements.txt
 COPY ./requirements.txt /app/requirements.txt
 
-#WORKDIR /app
+WORKDIR /app
 
 RUN pip install -r requirements.txt
 RUN python3 --version
