@@ -20,7 +20,7 @@ env:
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
-  TEST_TAG: innablrtest:test
+  TEST_TAG: ${{ github.repository }}:test
 
 jobs:
   build:
@@ -62,7 +62,7 @@ jobs:
 
       # Starting docker container locally on github runner
       - name: start docker container
-        run: docker run --rm -d -p 5000:5000 ${{ env.IMAGE_NAME }}
+        run: docker run --rm -d -p 5000:5000 ${{ env.TEST_TAG }}
       # running curl on locally hosted 
       - name: Run tests inside the container
         run: curl -LI http://localhost:5000/status -o /dev/null -w '%{http_code}\n' -s
