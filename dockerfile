@@ -1,6 +1,7 @@
 FROM ubuntu:20.04
 
 ENV COMMIT_SHA=${GITHUB_SHA}
+CMD ["echo $COMMIT_SHA"]
 
 # Installing Python 3.6
 RUN apt-get update && \

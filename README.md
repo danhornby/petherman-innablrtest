@@ -34,10 +34,7 @@ Last but not least, your application is packaged and published to the project’
 https://runnable.com/docker/python/dockerize-your-flask-application
 
 
-# Risks
-Ideally this would be built on a linux based docker host to avoid the following:
-+ SECURITY WARNING: You are building a Docker image from Windows against a non-Windows Docker host. All files and directories added to build context will have '-rwxr-xr-x' permissions. It is recommended to double check and reset permissions for sensitive files and directories.
-
-the deadsnakes repository could be removed and cause build issues in the future, to mitigate this, you would use packages from repositories within the organisation
-
-packages installed in the python requirements.txt are also currenlty unscanned and may have vulnerabilites, in a production environment use of productionised prescanned artifacts would be ideal
+# Risks and security considerations
++ The deadsnakes repository could be removed and cause build issues in the future, to mitigate this, you would use packages from repositories within the organisation
++ Packages installed in the python requirements.txt are also currenlty unscanned and may have vulnerabilites, in a production environment use of productionised prescanned artifacts would be ideal
++ We should also host our own runners rather than using the GitHub provided ones.

@@ -7,7 +7,9 @@ def hello_world():
     
 @app.route('/status')
 def status():
-    return 'Status!'
+    last_commit_sha=os.environ['COMMIT_SHA']
+    print(last_commit_sha)
+    return (last_commit_sha)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
