@@ -1,5 +1,7 @@
 FROM ubuntu:20.04
 
+ENV COMMIT_SHA=${GITHUB_SHA}
+
 # Installing Python 3.6
 RUN apt-get update && \
         apt-get install -y software-properties-common vim && \
@@ -19,9 +21,6 @@ WORKDIR /app
 RUN pip install -r requirements.txt
 RUN python3 --version
 COPY . /app
-
-CMD ["echo $GITHUB_SHA"]
-
 
 ENTRYPOINT [ "python3" ]
 CMD [ "app.py" ]
