@@ -25,7 +25,7 @@ Last but not least, your application is packaged and published to the project’
 §  description and version are supplied through a metadata file residing on the repo.
 §  Add simple test cases for your application.
 §  The repository should be all in all well documented. Provide comments in code where necessary and a nicely formatted README file.
-§  Are there any limitations to your implementation? Any risks associated? If so, explain those in the README file.Please complete the challenge as quickly as possible (24 hours is preferred, please let me know if you are unable to get this back to me by Friday and upon completion please email me back the link to your repository. Ensure your repository is private. You can add both Prateek.nayak@innablr.com.au and Dan.hornby@innablr.com.au as a collaborator to your repository or send us a git bundle.
+§  Are there any limitations to your implementation? Any risks associated? If so, explain those in the README file.
 
 # Alterations to requirements
 + I am using python instead of Golang or node.js as I am most comfortable with it
