@@ -65,13 +65,12 @@ jobs:
           tags: ${{ env.TEST_TAG }}
           build-args: 
             GITHUB_SHA=$SHORT_SHA
-                
 
       # Starting docker container locally on github runner
       - name: start docker container
         run: | 
           sudo apt install curl
-          docker run -d --p 5000:5000 ${{ env.TEST_TAG }}
+          docker run -d -p 5000:5000 ${{ env.TEST_TAG }}
           curl -LI --request GET --url http://127.0.0.1:5000/status -o /dev/null -w '%{http_code}\n' -s
 
       # Build and push Docker image with Buildx (don't push on PR)
