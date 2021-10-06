@@ -1,1 +1,41 @@
 # innablrtest
+# Project requirements
+Thank you for agreeing to complete our technical challenge! The challenge is based on a real-life case we were given from a client.  The Challenge:
+A large micro services project has set course to develop a considerable number of REST API’s in the next 12 months. They are aiming to use a standard set of technologies and patterns to bring consistency to their delivery.
+As part of this, you are required to build a boilerplate git repository that includes the basic scaffolding required for each team to kick off their projects.
+Your repository should define a comprehensive pipeline that has at least the following stages: test, build, publish.
+As part of this, a simple REST API should also be present in the repository that has a root / endpoint that returns a basic “Hello World” message, and a /status endpoint that returns the following response:
+{
+  "my-application": [
+    {
+      "version": "1.0",
+      "description": "my-application's description.",
+      "sha": "abc53458585"
+    }
+  ]
+}
+Last but not least, your application is packaged and published to the project’s Docker image repository.Considerations:
+§  You are asked to use the following technologies and make recommendations where required:
+§  Code repository: GitHub
+§  Pipelines: GitHub Actions
+§  API’s programming language: NodeJS or Golang ideally, but feel free to use something you are more accustomed to.
+§  Image repository: GitHub Packages: ghcr.io
+§  The 3 fields in the response above are not hardcoded.
+§  sha is your git branch’s most recent commit hash (last commit SHA) at build time.
+§  description and version are supplied through a metadata file residing on the repo.
+§  Add simple test cases for your application.
+§  The repository should be all in all well documented. Provide comments in code where necessary and a nicely formatted README file.
+§  Are there any limitations to your implementation? Any risks associated? If so, explain those in the README file.Please complete the challenge as quickly as possible (24 hours is preferred, please let me know if you are unable to get this back to me by Friday and upon completion please email me back the link to your repository. Ensure your repository is private. You can add both Prateek.nayak@innablr.com.au and Dan.hornby@innablr.com.au as a collaborator to your repository or send us a git bundle.
+
+# Alterations to requirements
++ I am using python instead of Golang or node.js as I am most comfortable with it
+
+# Resources used
+https://runnable.com/docker/python/dockerize-your-flask-application
+
+
+# Risks
+Ideally this would be built on a linux based docker host to avoid the following:
++ SECURITY WARNING: You are building a Docker image from Windows against a non-Windows Docker host. All files and directories added to build context will have '-rwxr-xr-x' permissions. It is recommended to double check and reset permissions for sensitive files and directories.
+
+the deadsnakes repository could be removed and cause build issues in the future, to mitigate this, you would use packages from repositories within the organisation
