@@ -21,6 +21,7 @@ env:
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
   TEST_TAG: ${{ github.repository }}:test
+  SHA_TMP: ${{ github.sha }}
 
 jobs:
   build:
@@ -35,8 +36,8 @@ jobs:
         uses: actions/checkout@v2
     
       # extract short sha variable from github
-      - name: Add SHORT_SHA env property with commit short sha
-        run: echo "SHORT_SHA=`git rev-parse --short HEAD`" >> $GITHUB_ENV
+      #- name: Add SHORT_SHA env property with commit short sha
+      #  run: echo "SHORT_SHA=`git rev-parse --short HEAD`" >> $GITHUB_ENV
         
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
@@ -64,7 +65,7 @@ jobs:
           load: true
           tags: ${{ env.TEST_TAG }}
           build-args: 
-            GITHUB_SHA=$SHORT_SHA
+            GITHUB_SHA=$SHA_TMP
 
       # Starting docker container locally on github runner
       - name: start docker container
@@ -85,7 +86,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: 
-            GITHUB_SHA=$SHORT_SHA
+            GITHUB_SHA=$SHA_TMP
           
 
       
