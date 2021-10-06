@@ -63,13 +63,9 @@ jobs:
       # Starting docker container locally on github runner
       - name: start docker container
         run: | 
+          sudo apt install curl
           docker run -d --publish published=5000,target=5000,mode=host ${{ env.TEST_TAG }}
-      #    curl -LI --request GET --url http://127.0.0.1:5000/status -o /dev/null -w '%{http_code}\n' -s
-
-      - name: test status using curl library
-        uses: wei/curl@master
-        with:
-          args: http://127.0.0.1:5000/status
+          curl -LI --request GET --url http://127.0.0.1:5000/status -o /dev/null -w '%{http_code}\n' -s
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
