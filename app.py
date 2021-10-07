@@ -14,9 +14,13 @@ def hello_world():
 def status():
     last_commit_sha=os.environ['COMMIT_SHA']
     
-    # for local testing, please remove
-    if not last_commit_sha:
-        last_commit_sha="abc1234567"
+    # for local testing,
+    #if not last_commit_sha:
+    #    last_commit_sha="abc1234567"
+    
+    #forcefulling failing test
+    last_commit_sha="12345"
+    
             
     json_build = {
         "my-application": [
