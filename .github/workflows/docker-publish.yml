@@ -74,13 +74,14 @@ jobs:
           docker logs -f --until=10s innablr
           echo "response"
           curl http://0.0.0.0:5000/status
+          # getting response code 
           CODE=$(curl -LI --request GET --url http://0.0.0.0:5000/status -o /dev/null -w '%{http_code}\n' -s)
           echo $CODE
           if [[ "$CODE" -ne 200 ]] ; then
-            exit 0
+            exit 1
           else
             echo "Returned 200"
-            exit 1
+            exit 0
           fi
 
 

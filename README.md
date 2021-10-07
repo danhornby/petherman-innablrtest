@@ -31,8 +31,8 @@ Last but not least, your application is packaged and published to the project’
 + I am using python instead of Golang or node.js as I am most comfortable with it
 
 # Resources used
-https://runnable.com/docker/python/dockerize-your-flask-application
-
++ https://runnable.com/docker/python/dockerize-your-flask-application
++ github docker actions
 
 # Risks and security considerations
 + The deadsnakes repository could be removed and cause build issues in the future, to mitigate this, you would use packages from repositories within the organisation
