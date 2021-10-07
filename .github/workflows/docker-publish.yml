@@ -67,23 +67,33 @@ jobs:
           build-args: GITHUB_SHA=${{ env.SHA_TMP }}
 
       # Starting docker container locally on github runner
-      - name: start docker container
+      - name: start docker container and running some tests
         run: | 
+          # install jq if it's not installed
+          sudo apt install jq
+          #running docker container
           docker run -d --name innablr -p 5000:5000 ${{ env.TEST_TAG }}
           docker ps -a
           docker logs -f --until=10s innablr
-          echo "response"
-          curl http://0.0.0.0:5000/status
-          # getting response code 
+          # testing response code and failing if non 200
           CODE=$(curl -LI --request GET --url http://0.0.0.0:5000/status -o /dev/null -w '%{http_code}\n' -s)
           echo $CODE
           if [[ "$CODE" -ne 200 ]] ; then
             exit 1
           else
-            echo "Returned 200"
-            exit 0
+            echo "Returned 200, continuing"
           fi
-
+          #verifying that the displayed sha is correct
+          SHA_TEST=$(curl http://0.0.0.0:5000/status | jq -r '."my-application"[].sha')
+          echo "${{ env.SHA_TMP }}"
+          echo "$SHA_TEST"
+          if [ "${{ env.SHA_TMP }}" = "$SHA_TEST" ]; then
+              echo "Sha values matched"
+          else
+              echo "Sha did not match"
+              exit 1
+          fi
+          exit 0
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action

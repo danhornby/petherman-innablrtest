@@ -27,8 +27,13 @@ Last but not least, your application is packaged and published to the project’
 §  The repository should be all in all well documented. Provide comments in code where necessary and a nicely formatted README file.
 §  Are there any limitations to your implementation? Any risks associated? If so, explain those in the README file.
 
+# Useful information
++ Metadata is stored in metadata.py
++ The solution is built using the Python Flask web framework
+
 # Alterations to requirements
 + I am using python instead of Golang or node.js as I am most comfortable with it
++ Although it looks like you're mentioning the short-sha in your sample response, it wasn't specifically asked for, so instead I have outputted the full sha so I could use the github provided pseudo-parameters { github.sha }, if there was a requirement to use the short sha, i would use a function which calls git rev-parse --short HEAD
 
 # Resources used
 + https://runnable.com/docker/python/dockerize-your-flask-application
@@ -38,3 +43,4 @@ Last but not least, your application is packaged and published to the project’
 + The deadsnakes repository could be removed and cause build issues in the future, to mitigate this, you would use packages from repositories within the organisation
 + Packages installed in the python requirements.txt are also currenlty unscanned and may have vulnerabilites, in a production environment use of productionised prescanned artifacts would be ideal
 + We should also host our own runners rather than using the GitHub provided ones.
+
