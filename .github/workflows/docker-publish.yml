@@ -76,7 +76,7 @@ jobs:
           curl http://0.0.0.0:5000/status
           CODE=$(curl -LI --request GET --url http://0.0.0.0:5000/status -o /dev/null -w '%{http_code}\n' -s)
           echo $CODE
-          if [[ "$status_code" -ne 200 ]] ; then
+          if [[ "$CODE" -ne 200 ]] ; then
             exit 1
           else
             echo "Returned 200"
