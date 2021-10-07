@@ -58,7 +58,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       -
-        name: Build and export to Docker
+        name: Building the docker for testing first
         uses: docker/build-push-action@v2
         with:
           context: .
@@ -67,7 +67,10 @@ jobs:
           build-args: GITHUB_SHA=${{ env.SHA_TMP }}
 
       # Starting docker container locally on github runner
-      - name: start docker container and running some tests
+      # This section also runs a couple tests that will fail the build if they dont complete
+      # + verifiying that a status code of 200 is returned
+      # + verifying the correct SHA value is posted
+      - name: Start docker container and running some tests
         run: | 
           # install jq if it's not installed
           sudo apt install jq
